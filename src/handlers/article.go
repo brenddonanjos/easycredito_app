@@ -120,9 +120,6 @@ func (a Article) SyncArticle() (err error) {
 	a.ActionsArticle.CheckAndSaveSynchronous(articles)
 
 	/*
-		//!! IMPORTANT !!!
-		//UNCOMMENT THIS SECTION CASE YOU DB ACCEPT MORE THAN 1 USER CONNECTION
-
 		//save on db using golang multi-thread processes (Goroutines)
 		a.ActionsArticle.CheckAndSave(articles) //this function returns a channel if we wants manipulated it
 	*/

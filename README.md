@@ -1,7 +1,7 @@
 
 <p align="center"><a href="https://easycredito.com.br" target="_blank"><img src="https://cdn2.easycredito.com.br/assets/main/logo-easycredito-6047341476fccf58a054d87a48cf1b8ab0f88b36b9af01dc0f54583ec18c93a7.png" width="180"></a></p>
 
-<h2 align="center">Back-end Challenge 🏅 2021 - Space Flight News</h2>
+<h2 align="center">Projeto Back-end Challenge 🏅</h2>
 <p align="center">Escrito em GoLang com  Echo Framework </p>
 <p align="center">Módulo EasyCrédito para integração com a API Space Flight News</p>
 
@@ -18,7 +18,7 @@
 ```
 cd easycredito_app
 ```
-<p>2. Iremos subir os containeres utilizando o docker-compose (Certifique-se de as portas 8000 e 3306 estejam livres): </p>   
+<p>2. Iremos subir os containeres utilizando o docker-compose: </p>   
 
 ```
 docker-compose up -d
@@ -28,17 +28,40 @@ docker-compose up -d
 
 ## Documentação
 <div id="docs">
-<p>Após iniciar os containeres corretamente e o sistema estiver funcionando, a página inicial do sistema (127.0.0.1:8000) disponibiliza uma descrição detalhada sobre as requisições e respostas</p>
+<h3>Modelo EER</h3>
 <p>No diretório  /docs estará disponibilizado um diagrama EER do banco de dados</p>
+
+<h3>Acesso via Postman</h3>
 <p>Também no diretório /docs foi disponibilizado uma collection e um enviroment para acesso via postman</p>
 <p>Para visualização da collection é necessário que o postman esteja devidamente instalado na em máquina</p>
 <p>1. Com o programa aberto importe a collection "go_easycredito_app.postman_collection" clicando no botão "import" no canto superior esquerdo.</p>
 <p>2. Agora importe o envirnoment "go_easycredito_app.postman_environment.json" e selecione o environment importado no canto superior esquerdo</p>
+
+<h3>Configurar email para aviso de erro (Sincronização com SpaceFlightNews)</h3>
+<p>O sistema possui a funcionalidade de enviar emails caso ocorra erros na sincronização, para configurar é necessário informar um email e senha para isso acesse o arquivo: </p>
+
+```
+/src/actions/util.go  - linhas 13 e 14
+```
+<p>Altere os valores das variáveis <b>from</b> e <b>password</b> com informações de autenticação válida. </p>
+<img src="docs/prints/sendmailprint.png">
+<p>Talves seja necessário ativar a permissão para apps menos seguros no email informado, caso use gmail é possível acessar nesse <a href="https://myaccount.google.com/lesssecureapps" target="blank">link</a></p>
+
+<h3>OBSERVAÇÃO IMPORTANTE !</h3>
+<p>O processo de sincronização foi originalmente desenvolvido utilizando os processos multi thread do GoLang (Goroutines), porém o banco de dados versão grátis Jaws Heroku permite apenas uma conexão/operação por vez, impossibilitando o registro no banco utilizando mais de uma thread</p>
+<p>Caso queiramos testar este processo foi configurado um container Mysql para conexão com banco local. Para configurar o banco local precisaremos seguir alguns passos:</p>
+<p>Acesse o arquivo <b>/src/database/database.go</b> e mude o valor da constante <b>DB_HOST</b> para <b>"mysql_app"</b></p>
+<img src="docs/prints/localdbprint.png">
+<p>Acesse o arquivo <b>/src/handlers/article.go</b>, após isso na função <b>SyncArticle()</b> altere a chamada de <b>CheckAndSaveSynchronous(articles)</b> para <b>CheckAndSave(article)</b></p>
+<img src="docs/prints/syncfunctionprint.png">
+
+
 </div>
 
 
-As seguintes estão sendo foram usadas na construção do projeto:
+As seguintes tecnologias foram usadas na construção do projeto:
 
 - [GoLang](https://go.dev/)
+- [Echo](https://echo.labstack.com/)
 - [Docker](https://www.docker.com/)
 - [Mysql](https://www.mysql.com/)
