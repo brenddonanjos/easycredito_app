@@ -1,21 +1,37 @@
 version: '3.6'
 
 services:
-    backend:
-      build: .
-      container_name: backend
-      volumes: 
-        - ./:/go/src
-      ports: 
-        - 8000:8000
-      # depends_on:
-      #   - mysql
-      #   - rabbitmq
-      command: bash -c "GOOS=linux go build main.go && air && go run main.go"
-      networks:
-        - nt_main
+  backend:
+    build: .
+    container_name: backend
+    volumes:
+      - ./:/go/src
+    ports:
+      - 8000:8000
+    # depends_on:
+    #   - mysql_app
+    command: bash -c "cd src && GOOS=linux go build main.go && air && go run main.go"
+    networks:
+      - nt_main
 
-networks: 
+  # mysql_app:
+  #   image: mysql:8.0
+  #   container_name: mysql_app
+  #   restart: always
+  #   ports:
+  #     - 3306:3306
+  #   environment:
+  #     MYSQL_ROOT_HOST: localhost
+  #     MYSQL_ROOT_PASSWORD: root
+  #     MYSQL_DATABASE: ve51yyhyfzso671r
+  #     MYSQL_USER: cdiafhy8genyu1rc
+  #     MYSQL_PASSWORD: ial7a6yjsw34im3y
+  #   volumes:
+  #     - ./src/database/mysql:/var/lib/mysql
+  #   networks:
+  #     - nt_main
+
+networks:
   nt_main:
     driver: bridge
     ipam:
