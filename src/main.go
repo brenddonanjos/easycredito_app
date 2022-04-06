@@ -8,6 +8,7 @@ import (
 	"github.com/brenddonanjos/easycredito_app/src/actions"
 	"github.com/brenddonanjos/easycredito_app/src/database"
 	"github.com/brenddonanjos/easycredito_app/src/handlers"
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/robfig/cron/v3"
@@ -28,6 +29,10 @@ func main() {
 	db := database.Open()
 	defer db.Close()
 
+	//Validator
+	e.Validator = &handlers.CustomValidator{
+		Validator: validator.New(),
+	}
 	//Routes
 	e.GET("/", func(c echo.Context) error {
 		return c.String(http.StatusOK, "Back-end Challenge 2021 🏅 - Space Flight News")

@@ -1,0 +1,302 @@
+openapi: 3.0.1
+info:
+  title: Backend Challenge API
+  description: Documentação da api Backend Challenge (Easy Crédito / Codesh)
+  version: 1.0.0
+servers:
+  url: https://virtserver.swaggerhub.com/brenddonanjos/EasyCredito/1.0.0
+- url: http://127.0.0.1:8000
+paths:
+  /articles:
+    get:
+      summary: Retorna uma lista com todos os artigos
+      parameters:
+        - in: query
+          name: page
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+          description: Número da página (São exibidos 10 elementos por página)
+      responses:
+        '200':
+          description: Um array JSON contendo os objetos dos artigos encontrados
+          content:
+            application/json:
+              schema: 
+                type: array
+                items: 
+                  $ref: '#/components/schemas/Article'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    post:
+      summary: Cria um novo Artigo
+      requestBody:
+        description: Parâmetros do artigo a ser salvo no banco de dados
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArticleReq'
+      responses:
+          '201':
+            description: Resposta de sucesso com objeto criado
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    success: 
+                      type: boolean
+                    message: 
+                      type: string
+                    body: 
+                      $ref: '#/components/schemas/ArticleResp'
+          '400':
+            description: Bad Request
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                  
+          '422':
+            description: Unprocessable Entity
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+          '500':
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+  /articles/{id}:
+    get:
+      summary: Obtém o artigo referente ao ID informado
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID do artigo 
+      responses:
+        '200':
+          description: Objeto do Artigo referente ao ID
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+    put:
+      summary: Atualiza o artigo referente ao ID informado
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID do artigo 
+      responses:
+          '201':
+            description: Resposta de sucesso com objeto atualizado
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    success: 
+                      type: boolean
+                    message: 
+                      type: string
+                    body: 
+                      $ref: '#/components/schemas/ArticleResp'
+          '400':
+            description: Bad Request
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+                  
+          '422':
+            description: Unprocessable Entity
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Error'
+          '500':
+            description: Internal Server Error
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    message:
+                      type: string
+    delete:
+      summary: Deleta o artigo referente ao ID informado
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+          description: ID do artigo 
+      responses:
+        '200':
+          description: Article deleted successfuly!
+          content: {}
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+  
+components:
+  schemas:
+    Article:
+      type: object
+      properties:
+        id: 
+          type: integer
+        featured: 
+          type: boolean
+        title: 
+          type: string
+        url: 
+          type: string
+        imageUrl: 
+          type: string
+        newsSite: 
+          type: string
+        summary: 
+          type: string
+        spaceFlightId:
+          type: integer
+        publishedAt:
+          type: string
+          format: date-time
+        createdAt: 
+          type: string
+          format: date-time
+        updatedAt: 
+          type: string
+          format: date-time
+        launches: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Launche'
+        events: 
+          type: array
+          items:
+            $ref: '#/components/schemas/Event'
+    Launche:
+      type: object
+      properties:
+        id: 
+          type: integer
+        provider: 
+          type: string
+        spaceFlightId: 
+          type: string
+        articleId: 
+          type: integer
+        createdAt: 
+          type: string
+          format: date-time
+        updatedAt: 
+          type: string
+          format: date-time
+    Event:
+      type: object
+      properties:
+        id: 
+          type: integer
+        provider: 
+          type: string
+        spaceFlightId: 
+          type: integer
+        articleId: 
+          type: integer
+        createdAt: 
+          type: string
+          format: date-time
+        updatedAt: 
+          type: string
+          format: date-time
+    ArticleReq:
+      type: object
+      properties:
+        featured: 
+          type: boolean
+        title: 
+          type: string
+        url: 
+          type: string
+        imageUrl: 
+          type: string
+        newsSite: 
+          type: string
+        summary: 
+          type: string
+    ArticleResp:
+      type: object
+      properties: 
+        id: 
+          type: integer
+        featured: 
+          type: boolean
+        title: 
+          type: string
+        url: 
+          type: string
+        imageUrl: 
+          type: string
+        newsSite: 
+          type: string
+        summary: 
+          type: string
+        spaceFlightId:
+          type: integer
+        publishedAt:
+          type: string
+          format: date-time
+        createdAt: 
+          type: string
+          format: date-time
+        updatedAt: 
+          type: string
+          format: date-time
+    Error:
+      type: object
+      properties:
+        success: 
+          type: boolean
+          default: false
+        message:
+          type: string

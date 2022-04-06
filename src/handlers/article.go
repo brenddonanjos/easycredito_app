@@ -60,26 +60,33 @@ func (a Article) ShowArticles(c echo.Context) error {
 }
 
 func (a Article) SetArticle(c echo.Context) error {
-
+	//bind params on struct
 	if err := c.Bind(&a.ActionsArticle.Article); err != nil {
-		return echo.NewHTTPError(http.StatusUnprocessableEntity)
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, Error(err))
 	}
 	a.ActionsArticle.Article.PublishedAt = time.Now()
 	a.ActionsArticle.Article.CreatedAt = time.Now()
 	a.ActionsArticle.Article.UpdatedAt = time.Now()
-	res, err := a.ActionsArticle.New() //creates new article
+
+	//validate required fields
+	if err := c.Validate(a.ActionsArticle.Article); err != nil {
+		return echo.NewHTTPError(http.StatusBadGateway, Error(err))
+	}
+
+	//creates new article
+	res, err := a.ActionsArticle.New()
 	if err != nil {
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
 	insertId, _ := res.LastInsertId()
 	a.ActionsArticle.Article.Id = int(insertId)
-	return c.JSON(http.StatusCreated, a.ActionsArticle.Article)
+	return c.JSON(http.StatusCreated, Success("Article created successfuly", a.ActionsArticle.Article))
 }
 
 func (a Article) UpdateArticle(c echo.Context) error {
 	id, _ := strconv.Atoi(c.Param("id"))
 	if err := c.Bind(&a.ActionsArticle.Article); err != nil {
-		return echo.NewHTTPError(http.StatusUnprocessableEntity)
+		return echo.NewHTTPError(http.StatusUnprocessableEntity, Error(err))
 	}
 	a.ActionsArticle.Article.Id = id
 	err := a.ActionsArticle.Update(id)
@@ -88,7 +95,7 @@ func (a Article) UpdateArticle(c echo.Context) error {
 		fmt.Println(err)
 		return echo.NewHTTPError(http.StatusInternalServerError)
 	}
-	return c.JSON(http.StatusCreated, &a.ActionsArticle.Article)
+	return c.JSON(http.StatusCreated, Success("Article updated", a.ActionsArticle.Article))
 }
 
 func (a Article) DeleteArticle(c echo.Context) error {

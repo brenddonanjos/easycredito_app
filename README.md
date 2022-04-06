@@ -28,24 +28,23 @@ docker-compose up -d
 
 ## Documentação
 <div id="docs">
+<h3>OpenApi</h3>
+<p>Link para documentação da api padrão OAS v3: <a href="https://app.swaggerhub.com/apis-docs/brenddonanjos/EasyCredito/1.0.0">CLIQUE AQUI</a></p>
 <h3>Modelo EER</h3>
-<p>No diretório  /docs estará disponibilizado um diagrama EER do banco de dados</p>
+<p>No diretório  <b>/docs</b> estará disponibilizado um diagrama EER do banco de dados</p>
 
 <h3>Acesso via Postman</h3>
-<p>Também no diretório /docs foi disponibilizado uma collection e um enviroment para acesso via postman</p>
+<p>Para requisições personalizadas e testes de casos específicos no diretório <b>/docs</b> foi disponibilizado uma collection e um enviroment para acesso via postman</p>
 <p>Para visualização da collection é necessário que o postman esteja devidamente instalado na em máquina</p>
-<p>1. Com o programa aberto importe a collection "go_easycredito_app.postman_collection" clicando no botão "import" no canto superior esquerdo.</p>
-<p>2. Agora importe o envirnoment "go_easycredito_app.postman_environment.json" e selecione o environment importado no canto superior esquerdo</p>
+<p>1. Com o programa aberto importe a collection <b>go_easycredito_app.postman_collection</b> clicando no botão "import" no canto superior esquerdo.</p>
+<p>2. Agora importe o envirnoment <b>go_easycredito_app.postman_environment.json</b> e selecione o environment importado no canto superior esquerdo</p>
 
 <h3>Configurar email para aviso de erro (Sincronização com SpaceFlightNews)</h3>
-<p>O sistema possui a funcionalidade de enviar emails caso ocorra erros na sincronização, para configurar é necessário informar um email e senha para isso acesse o arquivo: </p>
+<p>O sistema possui a funcionalidade de enviar emails caso ocorra erros na sincronização, para configurar é necessário informar um email e senha para isso acesse o arquivo: <b>/src/actions/util.go  - linhas 13 e 14</b> </p>
 
-```
-/src/actions/util.go  - linhas 13 e 14
-```
 <p>Altere os valores das variáveis <b>from</b> e <b>password</b> com informações de autenticação válida. </p>
 <img src="docs/prints/sendmailprint.png">
-<p>Talves seja necessário ativar a permissão para apps menos seguros no email informado, caso use gmail é possível acessar nesse <a href="https://myaccount.google.com/lesssecureapps" target="blank">link</a></p>
+<p>Talves seja necessário ativar a permissão para apps menos seguros no email informado, caso use gmail é possível acessar nesse <a href="https://myaccount.google.com/lesssecureapps" target="_blank">link</a></p>
 
 <h3>OBSERVAÇÃO IMPORTANTE !</h3>
 <p>O processo de sincronização foi originalmente desenvolvido utilizando os processos multi thread do GoLang (Goroutines), porém o banco de dados versão grátis Jaws Heroku permite apenas uma conexão/operação por vez, impossibilitando o registro no banco utilizando mais de uma thread</p>

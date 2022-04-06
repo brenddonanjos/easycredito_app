@@ -5,17 +5,17 @@ import "time"
 type Article struct {
 	Id            int       `json:"id" db:"id"`
 	Featured      bool      `json:"featured" db:"featured"`
-	Title         string    `json:"title" db:"title"`
-	Url           string    `json:"url" db:"url"`
+	Title         string    `json:"title" db:"title" validate:"required"`
+	Url           string    `json:"url" db:"url" validate:"required"`
 	ImageUrl      string    `json:"imageUrl" db:"imageUrl"`
 	NewsSite      string    `json:"newsSite" db:"newsSite"`
 	Summary       string    `json:"summary" db:"summary"`
-	PublishedAt   time.Time `json:"publishedAt" db:"publishedAt"`
 	SpaceFlightId int       `json:"spaceFlightId" db:"spaceFlightId"`
-	Launches      Launches  `json:"launches"`
-	Events        Events    `json:"events"`
+	PublishedAt   time.Time `json:"publishedAt" db:"publishedAt"`
 	CreatedAt     time.Time `json:"createdAt" db:"createdAt"`
 	UpdatedAt     time.Time `json:"updatedAt" db:"updatedAt"`
+	Launches      Launches  `json:"launches"`
+	Events        Events    `json:"events"`
 }
 
 type Articles []Article
