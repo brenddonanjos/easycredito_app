@@ -21,7 +21,7 @@ cd easycredito_app
 <p>2. Iremos subir os containeres utilizando o docker-compose: </p>   
 
 ```
-docker-compose up -d
+docker-compose up
 ```
 
 </div>
