@@ -58,7 +58,7 @@ docker-compose up
 
 ## Testes
 <div id="tests">
-<p>Para executarmos os testes unitários entraremos no diretório que contém o arquivo de testes e executaremos o comando go para iniciar o processo</p>
+<p>Para executarmos os testes unitários com o sistema já em funcionamento entraremos no diretório que contém o arquivo de testes e executaremos o comando go para iniciar o processo</p>
 
 ```
 cd src/handlers
