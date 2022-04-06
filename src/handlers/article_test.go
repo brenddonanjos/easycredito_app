@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/brenddonanjos/easycredito_app/src/database"
+	"github.com/go-playground/validator/v10"
 	"github.com/labstack/echo/v4"
 	"github.com/stretchr/testify/assert"
 )
@@ -19,6 +20,10 @@ func TestSetArticle(t *testing.T) {
 	db := database.Open()
 	defer db.Close()
 	e := echo.New()
+	//Validator
+	e.Validator = &CustomValidator{
+		Validator: validator.New(),
+	}
 	req := httptest.NewRequest(http.MethodPost, "/articles", strings.NewReader(articleJSON))
 	req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 	rec := httptest.NewRecorder()
