@@ -53,12 +53,10 @@ docker-compose up
 <img src="docs/prints/localdbprint.png">
 <p>Acesse o arquivo <b>/src/handlers/article.go</b>, após isso na função <b>SyncArticle()</b> altere a chamada de <b>CheckAndSaveSynchronous(articles)</b> para <b>CheckAndSave(article)</b></p>
 <img src="docs/prints/syncfunctionprint.png">
-
-
 </div>
 
-
-As seguintes tecnologias foram usadas na construção do projeto:
+<h4>Tecnologias utilizadas</h4>
+<p>As seguintes tecnologias foram usadas na construção do projeto:</p>
 
 - [GoLang](https://go.dev/)
 - [Echo](https://echo.labstack.com/)
