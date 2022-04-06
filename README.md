@@ -8,6 +8,7 @@
 <p align="center">
 <a href="#install">Instalação</a> •
 <a href="#docs">Documentação</a> • 
+<a href="#tests">Testes</a> • 
 
 ## Instalação
 <div id="install">
@@ -53,6 +54,26 @@ docker-compose up
 <img src="docs/prints/localdbprint.png">
 <p>Acesse o arquivo <b>/src/handlers/article.go</b>, após isso na função <b>SyncArticle()</b> altere a chamada de <b>CheckAndSaveSynchronous(articles)</b> para <b>CheckAndSave(article)</b></p>
 <img src="docs/prints/syncfunctionprint.png">
+</div>
+
+## Testes
+<div id="tests">
+<p>Para executarmos os testes unitários entraremos no diretório que contém o arquivo de testes e executaremos o comando go para iniciar o processo</p>
+
+```
+cd src/handlers
+```
+
+```
+go test
+```
+<p>Caso desejamos rodar os testes individualmente executaremos o seguinte comando:</p>
+
+```
+go test -v -run <NomeDaFuncaoTeste>
+```
+
+
 </div>
 
 <h4>Tecnologias utilizadas</h4>
