@@ -31,6 +31,10 @@ docker-compose up
 <div id="docs">
 <h3>OpenApi</h3>
 <p>Link para documentação da api padrão OAS v3: <a href="https://app.swaggerhub.com/apis-docs/brenddonanjos/EasyCredito/1.0.0">CLIQUE AQUI</a></p>
+
+<h3>Apresentação em vídeo</h3>
+<p>Link para apresentação rápida do projeto: <a href="https://www.loom.com/share/6dce8c3711a6468abcf7c78b7f01a280">https://www.loom.com/share/6dce8c3711a6468abcf7c78b7f01a280</a></p>
+
 <h3>Modelo EER</h3>
 <p>No diretório  <b>/docs</b> estará disponibilizado um diagrama EER do banco de dados</p>
 
