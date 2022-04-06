@@ -76,7 +76,7 @@ go test -v -run <NomeDaFuncaoTeste>
 
 </div>
 
-<h4>Tecnologias utilizadas</h4>
+<h3>Tecnologias utilizadas</h3>
 <p>As seguintes tecnologias foram usadas na construção do projeto:</p>
 
 - [GoLang](https://go.dev/)
